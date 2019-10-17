@@ -20395,32 +20395,51 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
  */
 
 var Home = function Home() {
-  var ref = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])();
+  var textareaRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])();
+  var buttonGroupRef = Object(react__WEBPACK_IMPORTED_MODULE_2__["useRef"])();
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    var resizeListener = function resizeListener() {
+      if (!buttonGroupRef.current || !textareaRef.current) {
+        return;
+      }
+
+      var buttonGroup = buttonGroupRef.current;
+      var textarea = textareaRef.current;
+      var newHeight = window.innerHeight - buttonGroup.scrollHeight - 12;
+      textarea.style.height = "".concat(newHeight, "px");
+    };
+
+    resizeListener();
+    window.addEventListener('resize', resizeListener);
+    return function () {
+      window.removeEventListener('resize', resizeListener);
+    };
+  });
   return __jsx("div", {
     className: "p-1",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 13
+      lineNumber: 34
     },
     __self: this
   }, __jsx(next_head__WEBPACK_IMPORTED_MODULE_3___default.a, {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 14
+      lineNumber: 35
     },
     __self: this
   }, __jsx("title", {
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 15
+      lineNumber: 36
     },
     __self: this
-  }, "Home"), __jsx("link", {
+  }, "Copy/Paste Textarea"), __jsx("link", {
     rel: "icon",
     href: "/favicon.ico",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 16
+      lineNumber: 37
     },
     __self: this
   }), __jsx("link", {
@@ -20430,32 +20449,31 @@ var Home = function Home() {
     crossOrigin: "anonymous",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 17
+      lineNumber: 38
     },
     __self: this
   })), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Input"], {
     type: "textarea",
-    innerRef: ref,
-    onChange: function onChange(e) {
-      var textarea = e.target;
-      textarea.style.height = "".concat(textarea.scrollHeight, "px");
-    },
+    innerRef: textareaRef,
     style: {
       height: 'auto'
     },
     className: "mb-1",
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 19
+      lineNumber: 40
     },
     __self: this
-  }), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_4__["ButtonGroup"], {
+  }), __jsx("div", {
+    className: "btn-group",
+    role: "group",
     style: {
       display: 'flex'
     },
+    ref: buttonGroupRef,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 29
+      lineNumber: 46
     },
     __self: this
   }, __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], {
@@ -20470,7 +20488,7 @@ var Home = function Home() {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              textarea = ref.current;
+              textarea = textareaRef.current;
 
               if (textarea) {
                 _context.next = 3;
@@ -20496,7 +20514,7 @@ var Home = function Home() {
     })),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 30
+      lineNumber: 47
     },
     __self: this
   }, "Paste"), __jsx(reactstrap__WEBPACK_IMPORTED_MODULE_4__["Button"], {
@@ -20511,7 +20529,7 @@ var Home = function Home() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              textarea = ref.current;
+              textarea = textareaRef.current;
 
               if (textarea) {
                 _context2.next = 3;
@@ -20533,7 +20551,7 @@ var Home = function Home() {
     })),
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 43
+      lineNumber: 60
     },
     __self: this
   }, "Copy")));
